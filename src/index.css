@@ -1,0 +1,542 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
+
+@import "tailwindcss";
+
+@theme {
+  --font-grotesk: 'Space Grotesk', sans-serif;
+  --color-background: #000000;
+  --color-foreground: #ffffff;
+  --color-accent: #888888;
+}
+
+@layer base {
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Space Grotesk', sans-serif;
+  background-color: #000000;
+  color: #ffffff;
+  overflow-x: hidden;
+}
+
+/* ==================== */
+/* CRT Scanline Effect  */
+/* ==================== */
+
+.crt-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(255, 255, 255, 0.015) 2px,
+    rgba(255, 255, 255, 0.015) 4px
+  );
+  animation: crtFlicker 8s infinite;
+}
+
+.crt-overlay::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse at center,
+    transparent 55%,
+    rgba(0, 0, 0, 0.4) 100%
+  );
+}
+
+@keyframes crtFlicker {
+  0%, 100% { opacity: 1; }
+  3% { opacity: 0.97; }
+  6% { opacity: 1; }
+  7% { opacity: 0.98; }
+  8% { opacity: 1; }
+  45% { opacity: 1; }
+  46% { opacity: 0.96; }
+  47% { opacity: 1; }
+  92% { opacity: 1; }
+  93% { opacity: 0.98; }
+  94% { opacity: 1; }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #000;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #333;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+/* Selection */
+::selection {
+  background: #ffffff;
+  color: #000000;
+}
+
+/* ==================== */
+/* Custom Cursor        */
+/* ==================== */
+
+@media (pointer: fine) {
+  body,
+  a,
+  button,
+  input,
+  select,
+  textarea {
+    cursor: none;
+  }
+}
+
+/* Hide the native cursor site-wide; the custom cursor remains the only pointer. */
+html,
+body,
+#root,
+* {
+  cursor: none !important;
+}
+
+.custom-cursor-dot {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(174, 243, 255, 0.9);
+  box-shadow: 0 0 8px 2px rgba(174, 243, 255, 0.4);
+  pointer-events: none;
+  z-index: 99999;
+  transform: translate(-50%, -50%);
+  mix-blend-mode: screen;
+}
+
+.custom-cursor-ring {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 1px solid rgba(174, 243, 255, 0.25);
+  pointer-events: none;
+  z-index: 99998;
+  transform: translate(-50%, -50%);
+  transition: width 0.2s ease, height 0.2s ease, border-color 0.2s ease;
+}
+
+.custom-cursor-ring:hover,
+.custom-cursor-ring.hover {
+  width: 40px;
+  height: 40px;
+  border-color: rgba(174, 243, 255, 0.5);
+}
+
+/* ==================== */
+/* Portfolio Gallery    */
+/* ==================== */
+
+.portfolio-gallery {
+  padding: 100px 60px;
+  max-width: 1800px;
+  margin: 0 auto;
+}
+
+.gallery-header {
+  margin-bottom: 60px;
+}
+
+.gallery-title {
+  font-size: 4rem;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  margin-bottom: 16px;
+  background: linear-gradient(135deg, #ffffff 0%, #666666 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.gallery-subtitle {
+  font-size: 1.2rem;
+  color: #999999;
+  font-weight: 400;
+  max-width: 600px;
+}
+
+/* Filter buttons */
+.gallery-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 50px;
+}
+
+.filter-btn {
+  padding: 10px 24px;
+  border: 1px solid #222;
+  border-radius: 50px;
+  background: transparent;
+  color: #888;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  letter-spacing: 0.02em;
+}
+
+.filter-btn:hover {
+  border-color: #555;
+  color: #fff;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.filter-btn.active {
+  background: #ffffff;
+  color: #000000;
+  border-color: #ffffff;
+  font-weight: 600;
+}
+
+/* Gallery grid */
+.gallery-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+
+.gallery-item {
+  flex: 1 1 350px;
+  max-width: 450px;
+  position: relative;
+  border-radius: 16px;
+  overflow: hidden;
+  cursor: pointer;
+  background: #111;
+  opacity: 0;
+  transform: translateY(30px);
+  animation: galleryFadeIn 0.6s ease forwards;
+}
+
+.gallery-item-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@keyframes galleryFadeIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.gallery-item-inner {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+}
+
+.gallery-placeholder {
+  position: absolute;
+  inset: 0;
+  background: #111;
+  z-index: 1;
+}
+
+.placeholder-shimmer {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, #111 25%, #1a1a1a 50%, #111 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+@keyframes shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+.gallery-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.4s ease;
+  opacity: 0;
+}
+
+.gallery-image.loaded {
+  opacity: 1;
+}
+
+.gallery-item:hover .gallery-image {
+  transform: scale(1.05);
+}
+
+/* Overlay */
+.gallery-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 30px 24px 24px;
+  background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, transparent 100%);
+  transform: translateY(100%);
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.gallery-item:hover .gallery-overlay {
+  transform: translateY(0);
+}
+
+.gallery-item-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 4px;
+  color: #ffffff;
+}
+
+.gallery-item-category {
+  font-size: 0.8rem;
+  color: #999;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-weight: 500;
+}
+
+/* ==================== */
+/* Lightbox             */
+/* ==================== */
+
+.lightbox-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.95);
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: lightboxFadeIn 0.3s ease;
+  backdrop-filter: blur(20px);
+}
+
+@keyframes lightboxFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.lightbox-content {
+  position: relative;
+  max-width: 90vw;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  animation: lightboxContentIn 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes lightboxContentIn {
+  from {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.lightbox-content img {
+  max-width: 85vw;
+  max-height: 80vh;
+  object-fit: contain;
+  border-radius: 12px;
+  box-shadow: 0 20px 80px rgba(0,0,0,0.8);
+}
+
+.lightbox-close {
+  position: absolute;
+  top: -50px;
+  right: 0;
+  background: none;
+  border: none;
+  color: #888;
+  font-size: 2rem;
+  cursor: pointer;
+  transition: color 0.2s ease;
+  padding: 8px;
+}
+
+.lightbox-close:hover {
+  color: #fff;
+}
+
+.lightbox-info {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.lightbox-info h3 {
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.lightbox-info span {
+  font-size: 0.85rem;
+  color: #666;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+/* ==================== */
+/* Broken-environment   */
+/* (no rAF / hidden     */
+/*  viewport: render    */
+/*  reveals in final    */
+/*  state)              */
+/* ==================== */
+
+/* Only applied when src/lib/motion-fix.js determines this environment cannot
+   drive animations. Scoped to the gallery reveal only (no global opacity
+   override), so normal browsers are unaffected. */
+.motion-blocked .gallery-item {
+  animation: none;
+  opacity: 1;
+  transform: none;
+}
+
+/* ==================== */
+/* Reduced Motion       */
+/* ==================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .crt-overlay {
+    animation: none;
+  }
+
+  .gallery-item {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+
+  .placeholder-shimmer {
+    animation: none;
+  }
+
+  .custom-cursor-dot,
+  .custom-cursor-ring {
+    display: none !important;
+  }
+
+  body,
+  a,
+  button,
+  input,
+  select,
+  textarea {
+    cursor: auto !important;
+  }
+}
+
+/* ==================== */
+/* Focus Visible        */
+/* ==================== */
+
+:focus-visible {
+  outline: 2px solid rgba(174, 243, 255, 0.8);
+  outline-offset: 3px;
+}
+
+/* ==================== */
+/* Responsive           */
+/* ==================== */
+
+@media (max-width: 1024px) {
+  .portfolio-gallery {
+    padding: 80px 40px;
+  }
+
+  .gallery-title {
+    font-size: 3rem;
+  }
+
+  .gallery-item {
+    flex: 1 1 280px;
+    max-width: 380px;
+  }
+
+  .gallery-grid {
+    gap: 16px;
+  }
+}
+
+@media (max-width: 768px) {
+  .portfolio-gallery {
+    padding: 60px 20px;
+  }
+
+  .gallery-title {
+    font-size: 2.2rem;
+  }
+
+  .gallery-subtitle {
+    font-size: 1rem;
+  }
+
+  .gallery-item {
+    flex: 1 1 100%;
+    max-width: 100%;
+  }
+
+  .gallery-grid {
+    gap: 14px;
+  }
+
+  .gallery-filters {
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    padding-bottom: 10px;
+    margin-bottom: 30px;
+  }
+
+  .filter-btn {
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .lightbox-content img {
+    max-width: 95vw;
+    max-height: 70vh;
+  }
+}
