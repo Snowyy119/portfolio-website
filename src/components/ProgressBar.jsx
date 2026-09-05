@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useScroll, useSpring } from '../lib/motion-fix';
+import { motion, useScroll, useSpring } from '../lib/motion-fix';
 
 export default function ProgressBar() {
   const { scrollYProgress } = useScroll();
@@ -22,8 +22,8 @@ export default function ProgressBar() {
   return (
     <div className="fixed top-0 left-0 right-0 z-50">
       {/* Bar */}
-      <div
-        className="h-px bg-white/80 origin-left"
+      <motion.div
+        className="h-px bg-gray-500 origin-left"
         style={{ scaleX }}
       />
       {/* Percentage */}
