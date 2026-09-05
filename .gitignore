@@ -25,3 +25,6 @@ dist-ssr
 
 # Accidental .git rename — never track this
 .git_disabled/
+
+# Cline skills/agent config — local only
+.cline/
