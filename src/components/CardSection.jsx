@@ -8,7 +8,7 @@ const cards = [
   {
     title: 'Visual Experiments',
     description: 'Real-time scenes where light, motion, and material collide — digital experiments built frame by frame.',
-    image: BASE + '1337H4Xrender.png',
+    image: BASE + 'pg_backoffice_anomaly.webp',
     link: '/lab',
     linkText: 'EXPLORE LAB',
   },
