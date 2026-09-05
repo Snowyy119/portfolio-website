@@ -28,3 +28,9 @@ dist-ssr
 
 # Cline skills/agent config — local only
 .cline/
+
+# Reference/design assets — local only
+references/
+
+# Local helper scripts — local only
+scripts/
