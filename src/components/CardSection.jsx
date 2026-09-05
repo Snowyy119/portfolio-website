@@ -2,18 +2,20 @@ import { motion } from '../lib/motion-fix';
 import { useState, useRef, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 
+const BASE = import.meta.env.BASE_URL;
+
 const cards = [
   {
     title: 'Visual Experiments',
     description: 'Real-time scenes where light, motion, and material collide — digital experiments built frame by frame.',
-    image: '/1337H4Xrender.png',
+    image: BASE + '1337H4Xrender.png',
     link: '/lab',
     linkText: 'EXPLORE LAB',
   },
   {
     title: 'Environments & Worlds',
     description: 'Cinematic environments and composed scenes — digital worlds shaped by form, light, and depth.',
-    image: '/pg_kuwahara.webp',
+    image: BASE + 'pg_kuwahara.webp',
     link: '/lab',
     linkText: 'SEE WORK',
   },

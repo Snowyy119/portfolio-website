@@ -129,7 +129,7 @@ export default function Header({ menuOpen, onMenuToggle }) {
   const toggleSound = () => {
     if (!audioRef.current) {
       // Create the looping background track on first user interaction.
-      const el = new Audio('/audio/artmylife-winter-lo-fi-458274.mp3');
+      const el = new Audio(import.meta.env.BASE_URL + 'audio/artmylife-winter-lo-fi-458274.mp3');
       el.loop = true;
       el.volume = 0.5;
       audioRef.current = el;

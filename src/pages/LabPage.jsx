@@ -3,41 +3,43 @@ import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from '../lib/motion-fix';
 import { createPortal } from 'react-dom';
 
+const BASE = import.meta.env.BASE_URL;
+
 const projects = [
-  { id: 47, title: 'Tri Anamorph', image: '/1337H4Xrender.png', featured: true },
-  { id: 46, title: 'Organic Cell', image: '/aphrodite.png' },
-  { id: 44, title: 'Gaussian Splat Assembly', image: '/BryanAgency.png' },
-  { id: 43, title: 'The Cube', image: '/Gabecube.png' },
-  { id: 42, title: 'Fluid Distortion Slider', image: '/pooltest.png' },
-  { id: 37, title: 'Box Peek', image: '/Megalophobia1.png' },
-  { id: 35, title: 'Water Text', image: '/pHOTO.png' },
-  { id: 34, title: 'Sci-Fi Terrain', image: '/renderoffice.png' },
-  { id: 33, title: 'Lightning Text', image: '/EliasRENDER2.png' },
-  { id: 32, title: 'Reaction-Diffusion', image: '/Pixelsorted.png' },
-  { id: 30, title: 'Flip Book', image: '/apple.png' },
-  { id: 29, title: 'Lightning Arcs', image: '/renderarc.png' },
-  { id: 28, title: 'Teleport', image: '/renderdeadhand.png' },
-  { id: 27, title: 'Emoji Bounce', image: '/Scoutgoldpan.png' },
-  { id: 25, title: 'Parasite Reach', image: '/Vice1.png' },
-  { id: 24, title: 'Velocity Stretch', image: '/FracturedReality.png' },
-  { id: 23, title: 'Wired Growth', image: '/1337H4Xrender2.png' },
-  { id: 20, title: 'Ghost Thread', image: '/backrooms2.png' },
-  { id: 17, title: 'Fireworks', image: '/MinephucIFIVESEVEN.png' },
-  { id: 14, title: 'Sci-Fi Tube', image: '/paranormal4.png' },
-  { id: 13, title: 'Logo Particle Flow', image: '/renderagency1.png' },
-  { id: 10, title: 'GPU Particles', image: '/Renderm4fade.png' },
-  { id: 9, title: 'Liquid Glass Effect', image: '/Rendermileteawp.png' },
-  { id: 7, title: 'Canvas Particles', image: '/TaggedDark2.png' },
-  { id: 5, title: 'The ASCII Explorer', image: '/Vice2.png' },
-  { id: 4, title: 'Portal Cube', image: '/apple.png' },
-  { id: 3, title: 'Transmission', image: '/1337H4Xrender.png' },
-  { id: 2, title: '3D Gaussian Splatting', image: '/Gabecube.png' },
-  { id: 1, title: 'Exploding Skeleton', image: '/pooltest.png' },
-  { id: 48, title: 'ascii-art', image: '/ascii-art.png' },
-  { id: 49, title: 'testpixel2.0000', image: '/testpixel2.0000.png' },
-  { id: 50, title: 'voxel.0038', image: '/voxel.0038.png' },
-  { id: 51, title: 'Mini Dust2', image: '/pg_mini_dust2.webp' },
-  { id: 52, title: 'Mini Inferno', image: '/pg_mini_inferno.webp' },
+  { id: 47, title: 'Tri Anamorph', image: BASE + '1337H4Xrender.png', featured: true },
+  { id: 46, title: 'Organic Cell', image: BASE + 'aphrodite.png' },
+  { id: 44, title: 'Gaussian Splat Assembly', image: BASE + 'BryanAgency.png' },
+  { id: 43, title: 'The Cube', image: BASE + 'Gabecube.png' },
+  { id: 42, title: 'Fluid Distortion Slider', image: BASE + 'pooltest.png' },
+  { id: 37, title: 'Box Peek', image: BASE + 'Megalophobia1.png' },
+  { id: 35, title: 'Water Text', image: BASE + 'pHOTO.png' },
+  { id: 34, title: 'Sci-Fi Terrain', image: BASE + 'renderoffice.png' },
+  { id: 33, title: 'Lightning Text', image: BASE + 'EliasRENDER2.png' },
+  { id: 32, title: 'Reaction-Diffusion', image: BASE + 'Pixelsorted.png' },
+  { id: 30, title: 'Flip Book', image: BASE + 'apple.png' },
+  { id: 29, title: 'Lightning Arcs', image: BASE + 'renderarc.png' },
+  { id: 28, title: 'Teleport', image: BASE + 'renderdeadhand.png' },
+  { id: 27, title: 'Emoji Bounce', image: BASE + 'Scoutgoldpan.png' },
+  { id: 25, title: 'Parasite Reach', image: BASE + 'Vice1.png' },
+  { id: 24, title: 'Velocity Stretch', image: BASE + 'FracturedReality.png' },
+  { id: 23, title: 'Wired Growth', image: BASE + '1337H4Xrender2.png' },
+  { id: 20, title: 'Ghost Thread', image: BASE + 'backrooms2.png' },
+  { id: 17, title: 'Fireworks', image: BASE + 'MinephucIFIVESEVEN.png' },
+  { id: 14, title: 'Sci-Fi Tube', image: BASE + 'paranormal4.png' },
+  { id: 13, title: 'Logo Particle Flow', image: BASE + 'renderagency1.png' },
+  { id: 10, title: 'GPU Particles', image: BASE + 'Renderm4fade.png' },
+  { id: 9, title: 'Liquid Glass Effect', image: BASE + 'Rendermileteawp.png' },
+  { id: 7, title: 'Canvas Particles', image: BASE + 'TaggedDark2.png' },
+  { id: 5, title: 'The ASCII Explorer', image: BASE + 'Vice2.png' },
+  { id: 4, title: 'Portal Cube', image: BASE + 'apple.png' },
+  { id: 3, title: 'Transmission', image: BASE + '1337H4Xrender.png' },
+  { id: 2, title: '3D Gaussian Splatting', image: BASE + 'Gabecube.png' },
+  { id: 1, title: 'Exploding Skeleton', image: BASE + 'pooltest.png' },
+  { id: 48, title: 'ascii-art', image: BASE + 'ascii-art.png' },
+  { id: 49, title: 'testpixel2.0000', image: BASE + 'testpixel2.0000.png' },
+  { id: 50, title: 'voxel.0038', image: BASE + 'voxel.0038.png' },
+  { id: 51, title: 'Mini Dust2', image: BASE + 'pg_mini_dust2.webp' },
+  { id: 52, title: 'Mini Inferno', image: BASE + 'pg_mini_inferno.webp' },
 ];
 
 const featured = projects.find(p => p.featured);
@@ -47,7 +49,7 @@ const gridProjects = projects;
 // original (e.g. '/Christmas.png' -> '/thumbs/Christmas.webp').
 function thumbUrl(originalPath) {
   const name = originalPath.split('/').pop().replace(/\.(png|jpg|jpeg|webp)$/i, '');
-  return `/thumbs/${name}.webp`;
+  return BASE + `thumbs/${name}.webp`;
 }
 
 function CrystalGrid({ projects, onSelect }) {
