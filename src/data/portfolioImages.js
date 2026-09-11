@@ -46,4 +46,7 @@ export const portfolioImages = [
   { src: BASE + 'pg_mirage.webp', category: 'Environment', title: 'Mirage' },
   { src: BASE + 'pg_panorama.webp', category: 'Environment', title: 'Panorama' },
   { src: BASE + 'pg_kuwahara.webp', category: 'Art', title: 'Kuwahara' },
+  { src: BASE + 'GlassRoomTest3.0000.png', category: '3D Render', title: 'Glass Room Test 3' },
+  { src: BASE + 'Screendoortest.0000.png', category: '3D Render', title: 'Screendoor Test' },
+  { src: BASE + 'LandlordsSpecial.0000.png', category: '3D Render', title: "Landlord's Special" },
 ];

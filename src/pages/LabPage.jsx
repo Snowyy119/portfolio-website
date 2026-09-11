@@ -40,6 +40,9 @@ const projects = [
   { id: 50, title: 'voxel.0038', image: BASE + 'voxel.0038.png' },
   { id: 51, title: 'Mini Dust2', image: BASE + 'pg_mini_dust2.webp' },
   { id: 52, title: 'Mini Inferno', image: BASE + 'pg_mini_inferno.webp' },
+  { id: 53, title: 'Glass Room Test 3', image: BASE + 'GlassRoomTest3.0000.png' },
+  { id: 54, title: 'Screendoor Test', image: BASE + 'Screendoortest.0000.png' },
+  { id: 55, title: "Landlord's Special", image: BASE + 'LandlordsSpecial.0000.png' },
 ];
 
 const featured = projects.find(p => p.featured);
